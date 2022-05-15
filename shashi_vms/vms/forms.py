@@ -1,8 +1,8 @@
 from django import forms
-from .model import VihicleData
+from .models import VehicleData
 
-class VihicleDataForm(forms.ModelForm):
+class VehicleDataForm(forms.ModelForm):
 
     class Meta:
-        model = VihicleData
+        model = VehicleData
         fields = '__all__'

@@ -13,9 +13,9 @@ Type = (
     ("Four wheelers", "Four wheelers"),
 )
 
-class VihicleData(models.Model):
+class VehicleData(models.Model):
     vehicle_number = models.CharField(max_length=50, unique=True,blank=True,null=True, validators=[alphanumeric])
-    vehicle_type = models.CharField(max_length=13, choices=Type, blank=True,null=True)
+    vehicle_type = models.CharField(max_length=50, choices=Type, blank=True,null=True)
     vehicle_model = models.CharField(max_length=50, blank=True,null=True)
     vehicle_description = models.TextField(blank=True,null=True)
     created_on = models.DateTimeField(_('Created Date'), auto_now_add=True)

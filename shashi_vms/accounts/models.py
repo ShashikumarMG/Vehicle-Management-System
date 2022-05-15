@@ -27,7 +27,7 @@ class User(AbstractUser):
     published = models.BooleanField(_('Published on'), default=True)
 
     def __str__(self):
-        return self.vehicle_number
+        return self.email
 
 
 

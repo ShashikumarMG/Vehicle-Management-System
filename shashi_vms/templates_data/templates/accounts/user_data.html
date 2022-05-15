@@ -3,10 +3,8 @@
   {% block content %}
 <div class="container-fluid">
     <br>
-  <h1>Vehicle Management System</h1> 
-
-  <p>Our System deals about maintaining the vehicle database .</p>      <a class="btn-item place" href="{% url 'accounts:user_data'%}">Add Users</a>  &nbsp;&nbsp; <a class="btn-item place" href="{% url 'accounts:logout'%}">Log Out</a><br> <br>    <br>    <br>
-
+  <h1>Vehicle Management System</h1>
+  <p>Our System deals about maintaining the vehicle database .</p> <a class="btn-item place" href="{% url 'vms:vihicle'%}">Add Vehicle</a> &nbsp;&nabla;<a class="btn-item place" href="{% url 'accounts:logout'%}">Log Out</a> <br> <br>    <br>    <br>
   <div class="container-fluid">
     <!-- Control the column width, and how they should appear on different devices -->
     <div class="row">
@@ -14,7 +12,7 @@
         <div class="main-block" >
             <div class="left-part">
               <i class="fas fa-graduation-cap"></i>
-              <img src="/static/images/logo.png" height="500px" width="300px">
+              <img src="/static/images/user.jpg" height="500px" width="300px">
               <div class="btn-group">
               </div>
             </div>
@@ -22,19 +20,25 @@
                 {% csrf_token %}
               <div class="title">
                 <i class="fas fa-pencil-alt"></i> 
-                <h2>Add Vehicle Data</h2>
+                <h2>Add User Data</h2>
               </div>
               <div class="info">
-                {% render_field form.vehicle_number id="vehicle_number" placeholder="vehicle_number" %}
-                {{ form.vehicle_number.errors }}   <br>
-                {% render_field form.vehicle_type id="vehicle_type" placeholder="vehicle_type" %}
-                {{ form.vehicle_type.errors }}  <br>
-                {% render_field form.vehicle_model id="vehicle_model" placeholder="vehicle_model" %}
-                {{ form.vehicle_model.errors }}   <br>
-                {% render_field form.vehicle_description id="vehicle_description" placeholder="vehicle_description" %}
-                {{ form.vehicle_description.errors }}    <br>
+                {% render_field form.email id="email" type="email" class="form-control"  placeholder="username" %}
+                {{ form.email.errors }}   <br>
+                {% render_field form.username id="username"  class="form-control"  placeholder="username" %}
+                {{ form.username.errors }}   <br>
+                {% render_field form.first_name id="first_name"  class="form-control"  placeholder="first_name" %}
+                {{ form.first_name.errors }} <br>
+                {% render_field form.last_name id="last_name"  class="form-control"  placeholder="last_name" %}
+                {{ form.last_name.errors }}  <br>
+                {% render_field form.groups id="groups"  class="form-control"  placeholder="Role" %}
+                {{ form.group.groups }}   <br>
+                {% render_field form.password id="password"  class="form-control"  placeholder="password" %}
+                {{ form.password.errors }}   <br>
+                {% render_field form.conformpassword id="conformpassword"  class="form-control"  placeholder="conformpassword" %}
+                {{ form.conformpassword.errors }} <br>
               </div>
-              <button type="submit" href="/">Add Vehicle</button>
+              <button type="submit" href="/">Add User</button>
             </form>
           </div>
       </div>
@@ -42,20 +46,20 @@
           <table class="table table-striped">
               <tr>
                   <th>SL No</th>
-                  <th>Vehicle Number</th>
-                  <th>Vehicle Type</th>
-                  <th>Vehicle Model</th>
-                  <th>Vehicle Description</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
                   <th>Edit</th>
                   <th>Delete</th>
               </tr>
-              {% for data in vehicle_list%}
+              {% for data in user_list%}
               <tr>
                   <td>{{ forloop.counter }}</td>
-                  <td>{{data.vehicle_number}}</td>
-                  <td>{{data.vehicle_type}}</td>
-                  <td>{{data.vehicle_model}}</td>
-                  <td>{{data.vehicle_description}}</td>
+                  <td>{{data.username}}</td>
+                  <td>{{data.groups}}</td>
+                  <td>{{data.first_name}}</td>
+                  <td>{{data.last_name}}</td>
                   <td><input type="button" name="edit" id="" value="Edit/Update"></td>
                   <td><input type="button" name="edit" id="" value="Delete"></td>
               </tr>
