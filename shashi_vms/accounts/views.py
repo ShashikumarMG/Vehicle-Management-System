@@ -4,6 +4,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views import generic
 from .models import User
 from .forms import UserDataForm
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
 # Create your views here.
 class UsereDataList(generic.CreateView):
@@ -17,7 +19,27 @@ class UsereDataList(generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['user_list'] = User.objects.all()
-        # context['user_data'] = self.request.user
         return context
+
+
+class UserUpdate(UpdateView):
+    model = User
+    form_class = UserDataForm
+    template_name = "accounts/user_data.html"
+
+    def get_success_url(self):
+        return reverse_lazy('accounts:user_data')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_list'] = User.objects.all()
+        return context
+
+
+class DeleteUser(DeleteView):
+    model = User
+    template_name = "accounts/delete.html"
+
+    def get_success_url(self):
+        return reverse_lazy('accounts:user_data')

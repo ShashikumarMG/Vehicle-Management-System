@@ -20,7 +20,11 @@
                 {% csrf_token %}
               <div class="title">
                 <i class="fas fa-pencil-alt"></i> 
+                {% if object %}
+                <h2>Update User Data</h2>
+                {%else%}
                 <h2>Add User Data</h2>
+                {%endif%}
               </div>
               <div class="info">
                 {% render_field form.email id="email" type="email" class="form-control"  placeholder="username" %}
@@ -38,7 +42,12 @@
                 {% render_field form.conformpassword id="conformpassword"  class="form-control"  placeholder="conformpassword" %}
                 {{ form.conformpassword.errors }} <br>
               </div>
+              
+              {% if object %}
+              <button type="submit" href="/">Update User</button>
+              {%else%}
               <button type="submit" href="/">Add User</button>
+              {%endif%}
             </form>
           </div>
       </div>
@@ -60,8 +69,19 @@
                   <td>{{data.groups}}</td>
                   <td>{{data.first_name}}</td>
                   <td>{{data.last_name}}</td>
-                  <td><input type="button" name="edit" id="" value="Edit/Update"></td>
-                  <td><input type="button" name="edit" id="" value="Delete"></td>
+
+                  {% if request.user.groups == "Super Admin" or request.user.groups == "Super Admin" %}
+                  <td><a href="{% url 'accounts:users_update' user.id %}">Edit/Update</a></td>
+                  {% elif request.user.groups == "Super Admin" %}
+                  <td><a href="{% url 'accounts:delete' user.id %}">Delete</a></td>
+                  {%else%}
+                  <td>
+                    No permission
+                  </td>
+                  <td>
+                    No permission
+                  </td>
+                  {%endif%}
               </tr>
               {%endfor%}
           </table>

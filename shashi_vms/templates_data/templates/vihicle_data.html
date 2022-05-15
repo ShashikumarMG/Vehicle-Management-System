@@ -48,6 +48,8 @@
                   <th>Vehicle Description</th>
                   <th>Edit</th>
                   <th>Delete</th>
+
+
               </tr>
               {% for data in vehicle_list%}
               <tr>
@@ -56,8 +58,18 @@
                   <td>{{data.vehicle_type}}</td>
                   <td>{{data.vehicle_model}}</td>
                   <td>{{data.vehicle_description}}</td>
-                  <td><input type="button" name="edit" id="" value="Edit/Update"></td>
-                  <td><input type="button" name="edit" id="" value="Delete"></td>
+                  {% if request.user.groups == "Super Admin" or request.user.groups == "Super Admin" %}
+                  <td><a href="{% url 'vms:vehicle_update' user.id %}">Edit/Update</a></td>
+                  {% elif request.user.groups == "Super Admin" %}
+                  <td><a href="{% url 'vms:delete' user.id %}">Delete</a></td>
+                  {%else%}
+                  <td>
+                    No permission
+                  </td>
+                  <td>
+                    No permission
+                  </td>
+                  {%endif%}
               </tr>
               {%endfor%}
           </table>
